@@ -4,7 +4,11 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 28
+<<<<<<< HEAD
   productGUID: 93018e34a75dbe840afe28cb665359ce
+=======
+  productGUID: d9d3b6989267b164e9eba423abd469e7
+>>>>>>> cc17d4a039ce72d3a46ea2a60111c01c156b8cb6
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -925,10 +929,17 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 1
   windowsGamepadBackendHint: 0
+<<<<<<< HEAD
   cloudProjectId: 7e77b0d5-ae7e-4c84-9267-81fb9e04e0ea
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: Go Chess 2026-04-22_15-59-02
+=======
+  cloudProjectId: dd66c798-c446-4ff9-8b17-158175d0fa91
+  framebufferDepthMemorylessMode: 0
+  qualitySettingsNames: []
+  projectName: Go Chess
+>>>>>>> cc17d4a039ce72d3a46ea2a60111c01c156b8cb6
   organizationId: jo439750
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0

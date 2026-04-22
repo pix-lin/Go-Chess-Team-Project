@@ -1,3 +1,7 @@
+# Created by https://www.toptal.com/developers/gitignore/api/unity
+# Edit at https://www.toptal.com/developers/gitignore?templates=unity
+
+### Unity ###
 # This .gitignore file should be placed at the root of your Unity project directory
 #
 # Get latest from https://github.com/github/gitignore/blob/main/Unity.gitignore
@@ -12,9 +16,12 @@
 [Uu]ser[Ss]ettings/
 *.log
 
-# By default unity supports Blender asset imports, *.blend1 blender files do not need to be commited to version control.
-*.blend1
-*.blend1.meta
+
+git rm -r --cached Library/
+git commit -m "Ignore Unity Library files"
+
+
+
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
@@ -54,6 +61,7 @@ ExportedObj/
 *.mdb
 *.opendb
 *.VC.db
+*.dylib
 
 # Unity3D generated meta files
 *.pidb.meta
@@ -63,14 +71,10 @@ ExportedObj/
 # Unity3D generated file on crash reports
 sysinfo.txt
 
-# Mono auto generated files
-mono_crash.*
-
 # Builds
 *.apk
 *.aab
 *.unitypackage
-*.unitypackage.meta
 *.app
 
 # Crashlytics generated file
