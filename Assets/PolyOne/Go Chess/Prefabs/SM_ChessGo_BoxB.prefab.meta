@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: d63d2848961acfa459035f144e0afe09
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 345214
+  packageName: Props Pack - Go Chess
+  packageVersion: 0.0.1
+  assetPath: Assets/PolyOne/Go Chess/Prefabs/SM_ChessGo_BoxB.prefab
+  uploadId: 820234
