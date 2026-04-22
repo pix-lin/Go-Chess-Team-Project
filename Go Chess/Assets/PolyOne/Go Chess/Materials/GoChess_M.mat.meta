@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 99d7b2352d4e8744693c0dcb9a4344a7
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 345214
+  packageName: Props Pack - Go Chess
+  packageVersion: 0.0.1
+  assetPath: Assets/PolyOne/Go Chess/Materials/GoChess_M.mat
+  uploadId: 820234
