@@ -17,9 +17,6 @@
 *.log
 
 
-git rm -r --cached Library/
-git commit -m "Ignore Unity Library files"
-
 
 
 

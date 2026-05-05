@@ -1,10 +1,7 @@
 fileFormatVersion: 2
 guid: 64119ace7ca536843b70245bbe76c182
-PrefabImporter:
-  externalObjects: {}
-  userData: 
-  assetBundleName: 
-  assetBundleVariant: 
+labels:
+- FusionPrefab
 AssetOrigin:
   serializedVersion: 1
   productId: 345214
@@ -12,3 +9,8 @@ AssetOrigin:
   packageVersion: 0.0.1
   assetPath: Assets/PolyOne/Go Chess/Prefabs/SM_ChessGo_BoxW.prefab
   uploadId: 820234
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

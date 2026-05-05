@@ -1,10 +1,7 @@
 ﻿<Solution>
-<<<<<<< Updated upstream
+  <Project Path="Fusion.Unity.Editor.csproj" />
+  <Project Path="Fusion.Unity.csproj" />
   <Project Path="Assembly-CSharp.csproj" />
-  <Project Path="Assembly-CSharp-Editor.csproj" />
-=======
-  <Project Path="Assembly-CSharp-Editor.csproj" />
   <Project Path="Wingman.csproj" />
-  <Project Path="Assembly-CSharp.csproj" />
->>>>>>> Stashed changes
+  <Project Path="Unity.Fusion.CodeGen.csproj" />
 </Solution>
