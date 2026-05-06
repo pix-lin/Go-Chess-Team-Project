@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Title.unity
     guid: 1b3110c5162ebf94b8fb299ca92838e4
   - enabled: 1
-    path: Assets/Scenes/Single.unity
+    path: Assets/Scenes/SkillSelect.unity
     guid: 8c02a48b46fc77e4aa0d70520836d428
   - enabled: 1
     path: Assets/Scenes/Tournament.unity

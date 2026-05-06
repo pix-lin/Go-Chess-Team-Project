@@ -13,7 +13,7 @@ public class Buttons : MonoBehaviour
 
     public void SingleButton()
     {
-        SceneManager.LoadScene("Single");
+        SceneManager.LoadScene("SkillSelect");
     }
 
     public void MultiButton()
@@ -39,6 +39,8 @@ public class Buttons : MonoBehaviour
 
     public void StartButton()
     {
-        SceneManager.LoadScene(currentSceneIndex + 1);
+        SceneManager.LoadScene("Tournament");
     }
+
+    
 }

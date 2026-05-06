@@ -10,6 +10,8 @@ public class Skill : MonoBehaviour
 
     private Image buttonSprite;
 
+    public SkillList skillList;
+
     string skillName;
     string description;
 
@@ -18,7 +20,6 @@ public class Skill : MonoBehaviour
     void Start()
     {
         buttonSprite = gameObject.GetComponent<Image>();
-
     }
 
     
@@ -26,27 +27,16 @@ public class Skill : MonoBehaviour
 
     public void SkillSelect()
     {
-        switch (gameObject.name)
+        if (!skillList.TryGetSkill(gameObject.name, out SkillList.SkillInfo skillInfo))
         {
-            case "TetrisBlock":
-                skillName = "TetrisBlock";
-                description = "Generate tetris block that contains two black and two white";
-                break;
-
-            case "Baduk":
-                skillName = "Baduk";
-                description = "If you trap the other person's stone, you destroy it";
-                break;
-
-            case "NeutralBlock":
-                skillName = "NeutralBlock";
-                description = "Next turn, turn your opponent's stone into a neutral stone";
-                break;
+            return;
         }
 
 
         skillImage.sprite = buttonSprite.sprite;
-        skillNameText.text = skillName;
-        skillText.text = description;
+        skillNameText.text = skillInfo.skillName;
+        skillText.text = skillInfo.description;
+
+        SelectedSkillData.Set(buttonSprite.sprite, skillInfo.skillName, skillInfo.description);
     }
 }
