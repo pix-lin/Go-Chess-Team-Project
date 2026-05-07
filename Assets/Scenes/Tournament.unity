@@ -3054,11 +3054,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbc851aa2046a0044b5ee02142098945, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MatchButton
-  tournamentUI: {fileID: 0}
-  gameUI: {fileID: 0}
-  enemy1x: {fileID: 0}
-  enemy2x: {fileID: 0}
-  enemy3x: {fileID: 0}
+  tournamentUI: {fileID: 934662763}
+  gameUI: {fileID: 1319153401}
+  enemy1x: {fileID: 1816218266}
+  enemy2x: {fileID: 1887569552}
+  enemy3x: {fileID: 1029579526}
 --- !u!1 &1520245185
 GameObject:
   m_ObjectHideFlags: 0
