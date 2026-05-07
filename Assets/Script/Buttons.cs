@@ -18,7 +18,7 @@ public class Buttons : MonoBehaviour
 
     public void MultiButton()
     {
-        SceneManager.LoadScene("Multi");
+        SceneManager.LoadScene("PvPLobby");
     }
 
     public void SettingButton()
@@ -34,7 +34,7 @@ public class Buttons : MonoBehaviour
     public void BackButton()
     {
         
-        SceneManager.LoadScene(currentSceneIndex - 1);
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void StartButton()
