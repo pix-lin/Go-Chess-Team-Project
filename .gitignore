@@ -15,6 +15,9 @@
 [Ll]ogs/
 [Uu]ser[Ss]ettings/
 *.log
+*.csproj
+*.sln
+*.slnx
 
 
 
