@@ -4,192 +4,108 @@ using UnityEngine.InputSystem;
 using Fusion;
 using Unity.VisualScripting;
 
-public class PlayerController : NetworkBehaviour, IPlayerJoined
+// 플레이어 개별 컨트롤러
+// 각 플레이어마다 하나씩 스폰되며, 자기 캐릭터의 입력 처리 및 커서 시각화를 담당
+// 게임 전역 상태(보드, 턴 등)는 GameManager에서 관리하므로 여기서는 다루지 않음
+public class PlayerController : NetworkBehaviour
 {
-    public bool keySwitched; //Player and UI input mode transition key [true: Player / false: UI]
-    public int team; //1: Black / 2: White
+    public bool keySwitched; 
 
-    [Header("Settings")]
-    public int boardSize = 20;
-    public float startPos = 0.2465f; //왼쪽 아래(원점) 좌표
-    public float spacingOffset = 0.0275f;
-    //시작(-0.2465, 0, -0.2465) +-0.0275
+    [Networked] public int team { get; set; } //1: Black / 2: White
+                                               // 이 플레이어의 팀 번호 (1: 흑돌 / 2: 백돌)
+                                               // [Networked]로 선언되어 모든 피어에 자동 동기화됨
+                                               // GameManager가 스폰 직후 직접 할당함
 
-    public GameObject playerPrefab;
-    public GameObject blackStonePrefab;
-    public GameObject whiteStonePrefab;
-    public GameObject currentStone;
-
-    [Header("State")]
-    [Networked] public int currentTurn { get; set; } = 1; //Black(1), Whilte(2)
-    [Networked] public bool isGameOver { get; set; }
-    public struct GoChessBoard : INetworkStruct
-    {
-        public int IsPlaced; //0: 빈칸, 1: Black, 2: White
-        public Vector3 Position;
-    }
-
-    [Networked, Capacity(400)] //20 x 20
-    public NetworkArray<GoChessBoard> BoardArray => default;
-
+    public GameObject currentStone; // 커서 역할을 하는 돌 오브젝트 (보드 위에서 위치를 미리 보여주는 용도)
+    private GameManager gameManager;
     private InputSystem_Actions inputSystemActions;
     private int boardX = 9, boardY = 9; //center of board(20x20)
-    private bool moveInputPressed;
+    private bool moveInputPressed; // 한 번 누르면 한 칸만 이동하도록, 연속 발동 방지용
 
+    // 네트워크 오브젝트가 스폰될 때 호출됨 (Unity의 Start와 비슷한 역할)
     public override void Spawned()
     {
-        if(Object.HasStateAuthority)
-        {
-            currentTurn = 1;
-        }
+        // 씬에 있는 GameManager를 찾아서 참조 저장
+        gameManager = FindObjectOfType<GameManager>();
+        if (gameManager == null)
+            Debug.LogError("GameManager not found in scene!"); // 씬에 GameManager가 없으면 에러 출력
     }
 
+    // 입력 시스템 초기화 및 활성화
     public void OnEnable()
     {
         if (inputSystemActions == null)
-            inputSystemActions = new InputSystem_Actions();
+            inputSystemActions = new InputSystem_Actions(); // 입력 액션 객체가 없으면 새로 생성
 
-        inputSystemActions.Player.Enable();
+        inputSystemActions.Player.Enable(); // 플레이어 입력 맵 활성화
     }
 
+    // 입력 시스템 정리
     public void OnDisable()
     {
-        inputSystemActions.Player.Disable();
-        inputSystemActions.UI.Disable();
+        inputSystemActions.Player.Disable(); // 플레이어 입력 맵 비활성화
+        inputSystemActions.UI.Disable();     // UI 입력 맵 비활성화
     }
 
     private void Update()
     {
-        if (Object == null || !Object.IsValid || !Object.HasInputAuthority || isGameOver)
-            return;
+        // 입력 권한이 있는 클라이언트(=내 캐릭터)만 입력을 처리
+        // Object가 유효하지 않거나, 내 캐릭터가 아니면 아무것도 하지 않음
+        if (Object == null || !Object.IsValid || !Object.HasInputAuthority) return;
 
-        if (inputSystemActions == null)
-            return;
+        // GameManager가 없거나 게임이 끝난 상태면 입력 무시
+        if (gameManager == null || gameManager.isGameOver) return;
 
-        HandGridMovement();
+        // 입력 액션이 초기화 안 되어 있으면 무시
+        if (inputSystemActions == null) return;
 
-        if(inputSystemActions.Player.Jump.WasPressedThisFrame())
+        HandGridMovement(); // 방향 입력으로 커서 이동 처리
+
+        // Jump 키(돌 놓기 키)가 이번 프레임에 눌렸으면
+        if (inputSystemActions.Player.Jump.WasPressedThisFrame())
         {
-            RPC_RequestPlaceStone(boardX, boardY, team);
+            // GameManager에게 돌 배치 요청 RPC를 보냄
+            // 실제 검증과 처리는 StateAuthority(=호스트)의 GameManager에서 이루어짐
+            gameManager.RPC_RequestPlaceStone(boardX, boardY, team);
         }
 
-        UpdateCursorVisual();
-
+        UpdateCursorVisual(); // 커서 위치를 보드 좌표에 맞게 시각적으로 업데이트
     }
 
+    // 방향 입력을 받아서 커서를 한 칸씩 이동시키는 함수
     private void HandGridMovement()
     {
+        // 현재 입력된 이동 벡터 (스틱/WASD/방향키)
         Vector2 move = inputSystemActions.Player.Move.ReadValue<Vector2>();
+        int boardSize = gameManager.boardSize; // GameManager에서 보드 크기 가져옴
 
-        if(move.magnitude > 0.5f && !moveInputPressed)
+        // 입력 강도가 임계값(0.5)을 넘었고, 아직 처리되지 않은 입력이면
+        if (move.magnitude > 0.5f && !moveInputPressed)
         {
+            // x축 입력이 더 크면 좌우 이동, 아니면 상하 이동
+            // (대각선 입력 시 더 큰 축 하나만 처리하여 정확히 한 칸씩 이동)
             if (Mathf.Abs(move.x) > Mathf.Abs(move.y))
+                // x가 양수면 +1, 음수면 -1, 보드 범위(0 ~ boardSize-1)로 제한
                 boardX = Mathf.Clamp(boardX + (move.x > 0 ? 1 : -1), 0, boardSize - 1);
             else
+                // y축도 동일한 방식
                 boardY = Mathf.Clamp(boardY + (move.y > 0 ? 1 : -1), 0, boardSize - 1);
 
-            moveInputPressed = true;
+            moveInputPressed = true; // 처리됐다고 표시 (다음 입력 전까지 또 처리되지 않게)
         }
-
-        else if(move.magnitude < 0.1f)
+        // 입력이 거의 없을 때(스틱이 중앙으로 돌아왔을 때) 플래그 해제
+        // -> 다음 입력을 받을 준비
+        else if (move.magnitude < 0.1f)
         {
             moveInputPressed = false;
         }
     }
 
+    // 커서(currentStone)의 시각적 위치를 현재 boardX, boardY에 맞게 갱신
     private void UpdateCursorVisual()
     {
         if (currentStone != null)
-            currentStone.transform.localPosition = GetWorldPosition(boardX, boardY);
+            // GameManager의 좌표 변환 함수를 통해 보드 좌표 -> 월드 좌표 변환
+            currentStone.transform.localPosition = gameManager.GetWorldPosition(boardX, boardY);
     }
-
-    private Vector3 GetWorldPosition(int x, int y)
-    {
-        return new Vector3(startPos + (x * spacingOffset), 0.05f, startPos + (y * spacingOffset));
-    }
-
-    [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority)]
-    public void RPC_RequestPlaceStone(int x, int y, int playerTeam)
-    {
-        //Check Turn
-        if (currentTurn != playerTeam)
-            return;
-
-        int index = (y * boardSize) + x;
-        if (BoardArray[index].IsPlaced != 0)
-            return;
-
-        //place stone
-        var data = BoardArray[index];
-        data.IsPlaced = playerTeam;
-        BoardArray.Set(index, data);
-    }
-
-    public void PlaceStone(int x, int y, int team)
-    {
-        int index = (y * 20) + x; // 2차원 좌표를 1차원 인덱스로 변환
-        var data = BoardArray[index];
-        data.IsPlaced = team;
-        BoardArray.Set(index, data); // 값을 변경한 후 Set을 호출해야 동기화됨
-
-        //spawn stone
-        Runner.Spawn(team == 1 ? blackStonePrefab : whiteStonePrefab, GetWorldPosition(x, y), Quaternion.identity);
-
-        if(CheckWin(x, y, team))
-        {
-            Debug.Log($"Team {team} Wins");
-            isGameOver = true;
-            return;
-        }
-
-        //turn
-        currentTurn = (team == 1) ? 2 : 1;
-    }
-
-    private bool CheckWin(int x, int y, int team)
-    {
-        //4방향(가로, 세로, 대각선\, 대각선/)
-        int[,] dirs = { { 1, 0 }, { 0, 1 }, { 1, 1 }, { 1, -1 } };
-
-        for (int i = 0; i < 4; i++)
-        {
-            int count = 1;
-            //양방향 탐색
-            count += CountInDirection(x, y, dirs[i, 0], dirs[i, 1], team);
-            count += CountInDirection(x, y, -dirs[i, 0], -dirs[i, 1], team);
-
-            if (count >= 5) return true;
-        }
-        return false;
-    }
-
-    private int CountInDirection(int x, int y, int dx, int dy, int team)
-    {
-        int count = 0;
-        int nx = x + dx;
-        int ny = y + dy;
-
-        while(nx > 0 && nx < boardSize && ny > 0 && ny < boardSize)
-        {
-            if (BoardArray[(ny * boardSize) + nx].IsPlaced == team)
-            {
-                count++;
-                nx += dx;
-                ny += dy;
-            }
-            else break;
-        }
-        return count;
-    }
-
-    public void PlayerJoined(PlayerRef player)
-    {
-        if (player == Runner.LocalPlayer)
-        {
-            // 팀 할당 로직 (예: 먼저 들어오면 Black)
-            // 여기서는 단순화를 위해 인스펙터에서 설정하거나 별도 로직 필요
-            Runner.Spawn(playerPrefab);
-        }
-    }
-
 }

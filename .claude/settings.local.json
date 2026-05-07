@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"C:\\\\lion7project\\\\Go-Chess-Team-Project\" -Recurse -Directory)",
+      "Bash(Select-Object -First 20)"
+    ]
+  }
+}
