@@ -28,7 +28,7 @@ public class MatchButton : MonoBehaviour
 
         if (winCount >= 4)
         {
-            SceneManager.LoadScene("Title");
+            SceneManager.LoadScene("MainMenu");
             return;
         }
 
@@ -61,6 +61,6 @@ public class MatchButton : MonoBehaviour
 
     public void Lose()
     {
-        SceneManager.LoadScene("Title");
+        SceneManager.LoadScene("MainMenu");
     }
 }
