@@ -1,8 +1,8 @@
 using UnityEngine;
+using Fusion;
 
-public class GameManager : NetworkBe
+public class GameManager : NetworkBehaviour
 {
     PlayerController playerControllerScript;
-
 
 }

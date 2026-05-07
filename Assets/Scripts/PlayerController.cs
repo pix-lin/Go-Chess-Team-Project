@@ -137,7 +137,7 @@ public class PlayerController : NetworkBehaviour, IPlayerJoined
 
         if(CheckWin(x, y, team))
         {
-            Debug.Log($"Team {team} Winds");
+            Debug.Log($"Team {team} Wins");
             isGameOver = true;
             return;
         }
