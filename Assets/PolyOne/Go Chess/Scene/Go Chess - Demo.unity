@@ -472,7 +472,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 757058834}
     m_Modifications:
-    - target: {fileID: 5067401971671123910, guid: bfe5af60732c28f4683ae98e543ee8fa, type: 3}
+    - target: {fileID: 5067401971671123910, guid: bfe5af60732c28f4683ae98e543ee8fa,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5067401971671123910, guid: bfe5af60732c28f4683ae98e543ee8fa,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.0382
       objectReference: {fileID: 0}
@@ -534,11 +540,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 757058834}
     m_Modifications:
-    - target: {fileID: 4318076361433761481, guid: 64119ace7ca536843b70245bbe76c182, type: 3}
+    - target: {fileID: 4318076361433761481, guid: 64119ace7ca536843b70245bbe76c182,
+        type: 3}
       propertyPath: m_Name
       value: SM_ChessGo_BoxW
       objectReference: {fileID: 0}
-    - target: {fileID: 5007898102012884422, guid: 64119ace7ca536843b70245bbe76c182, type: 3}
+    - target: {fileID: 5007898102012884422, guid: 64119ace7ca536843b70245bbe76c182,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5007898102012884422, guid: 64119ace7ca536843b70245bbe76c182,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.415
       objectReference: {fileID: 0}
@@ -601,11 +614,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 757058834}
     m_Modifications:
-    - target: {fileID: 9038927210969955808, guid: b7782d5965d51ef4f823b0a5e55fbfdd, type: 3}
+    - target: {fileID: 9038927210969955808, guid: b7782d5965d51ef4f823b0a5e55fbfdd,
+        type: 3}
       propertyPath: m_Name
       value: SM_ChessGo_BoxLidB
       objectReference: {fileID: 0}
-    - target: {fileID: 9124869689879825246, guid: b7782d5965d51ef4f823b0a5e55fbfdd, type: 3}
+    - target: {fileID: 9124869689879825246, guid: b7782d5965d51ef4f823b0a5e55fbfdd,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9124869689879825246, guid: b7782d5965d51ef4f823b0a5e55fbfdd,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.444
       objectReference: {fileID: 0}
@@ -662,7 +682,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_ChessGo_ChessB
       objectReference: {fileID: 0}
-    - target: {fileID: 4742384332335375762, guid: 94debbd910fdb454da8564bd478a5620, type: 3}
+    - target: {fileID: 4742384332335375762, guid: 94debbd910fdb454da8564bd478a5620,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4742384332335375762, guid: 94debbd910fdb454da8564bd478a5620,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.0125
       objectReference: {fileID: 0}
@@ -702,6 +728,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7282297446303681487, guid: 94debbd910fdb454da8564bd478a5620, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 1c72d5b4a5f31e84eba33436e91cff2d, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -724,7 +754,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_ChessGo_Desk
       objectReference: {fileID: 0}
-    - target: {fileID: 5879653802424603380, guid: be910675bf0329340a56354fbefaa588, type: 3}
+    - target: {fileID: 5879653802424603380, guid: be910675bf0329340a56354fbefaa588,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5879653802424603380, guid: be910675bf0329340a56354fbefaa588,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -781,7 +817,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_ChessGo_BoxLidW
       objectReference: {fileID: 0}
-    - target: {fileID: 7354826664409501519, guid: 30d2d173e82d6d94d993532d0a8221e9, type: 3}
+    - target: {fileID: 7354826664409501519, guid: 30d2d173e82d6d94d993532d0a8221e9,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7354826664409501519, guid: 30d2d173e82d6d94d993532d0a8221e9,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.497
       objectReference: {fileID: 0}
@@ -834,7 +876,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 757058834}
     m_Modifications:
-    - target: {fileID: 5284369870686468235, guid: d63d2848961acfa459035f144e0afe09, type: 3}
+    - target: {fileID: 5284369870686468235, guid: d63d2848961acfa459035f144e0afe09,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5284369870686468235, guid: d63d2848961acfa459035f144e0afe09,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.387
       objectReference: {fileID: 0}
