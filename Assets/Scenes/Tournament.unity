@@ -412,10 +412,6 @@ MonoBehaviour:
   enemy3Image: {fileID: 548788798}
   enemy3SkillNameText: {fileID: 225396942}
   skillList: {fileID: 11400000, guid: 5f6b7c097f718694b8c51e167a0e4ae4, type: 2}
-  skillNames:
-  - TetrisBlock
-  - Baduk
-  - NeutralBlock
 --- !u!1 &221714572
 GameObject:
   m_ObjectHideFlags: 0
@@ -780,7 +776,6 @@ MonoBehaviour:
   enemy1x: {fileID: 1816218266}
   enemy2x: {fileID: 1887569552}
   enemy3x: {fileID: 1029579526}
-  winCount: 0
 --- !u!1 &303836086
 GameObject:
   m_ObjectHideFlags: 0
@@ -2489,7 +2484,6 @@ MonoBehaviour:
   enemy1x: {fileID: 1816218266}
   enemy2x: {fileID: 1887569552}
   enemy3x: {fileID: 1029579526}
-  winCount: 0
 --- !u!1 &1342420410
 GameObject:
   m_ObjectHideFlags: 0
@@ -2951,8 +2945,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -423}
-  m_SizeDelta: {x: 396.2559, y: 133.2848}
+  m_AnchoredPosition: {x: -0.000025749, y: -434}
+  m_SizeDelta: {x: 408.13, y: 150.2192}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1506670031
 MonoBehaviour:
@@ -3030,7 +3024,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 489145385, guid: 643d2177311fef546b80c6c90b626f6b, type: 3}
+  m_Sprite: {fileID: -554648617, guid: 643d2177311fef546b80c6c90b626f6b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3060,6 +3054,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbc851aa2046a0044b5ee02142098945, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MatchButton
+  tournamentUI: {fileID: 0}
+  gameUI: {fileID: 0}
+  enemy1x: {fileID: 0}
+  enemy2x: {fileID: 0}
+  enemy3x: {fileID: 0}
 --- !u!1 &1520245185
 GameObject:
   m_ObjectHideFlags: 0
@@ -3345,7 +3344,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -118327646, guid: 89eb97077bb8ade4b922f8349043be43, type: 3}
+  m_Sprite: {fileID: 623921171, guid: 89eb97077bb8ade4b922f8349043be43, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
